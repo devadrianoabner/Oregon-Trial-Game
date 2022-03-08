@@ -2,63 +2,82 @@
 class Carroça{
 
     constructor(){
-        this.capacidade = 3
-        this.nivel = 1
-        this.viajantes = []
-        this.velocidade = 1
-
+        this._capacidade = 3
+        this._nivel = 1
+        this._viajantes = []
+        this._velocidade = 1
+        this._experiencia = 0
+        this._experienciaParaProximoNivel = 100
     }
+    // get experiencia(){
+    //     return this._experiencia
+    // }
 
-    
+    // set experiencia(novaExperiencia){
+    //     this._experiencia += novaExperiencia
+    // }
+
     convidarCarroça(viajante){
-        if(this.viajantes.length < this.capacidade){
-            this.viajantes.push(viajante)
+        if(this._viajantes.length < this._capacidade){
+            this._viajantes.push(viajante)
             console.log("Passageiro adicionado")
-        }else if(this.viajantes.length >= this.capacidade){
+        }else if(this._viajantes.length >= this._capacidade){
             console.log("Carroça lotada")
         }
     }
-
     sairDaCarroça(indice){
-        if(this.viajantes.length > 0){
-            this.viajantes.splice(indice, 1)
+        if(this._viajantes.length > 0){
+            this._viajantes.splice(indice, 1)
             console.log("Viajante removido") 
         }
     }
-
     assentosDisponiveis(){
-        let assentosDisponiveis = this.capacidade - (this.viajantes.length + 1)
-        
+        let assentosDisponiveis = this._capacidade - (this._viajantes.length + 1)
         console.log(`${assentosDisponiveis} é a quantidade de assentos livres`)
         return assentosDisponiveis
     }
-
     viajar(){
 
     }
-
     acampar(){
 
     }
+    ganhoDeExp(expAdquirida){    
+        console.log(`Sua carroça ganhou ${expAdquirida} de experiência`)      
+        let expResidual = 0
+        if(expAdquirida + this._experiencia >= this._experienciaParaProximoNivel){
+            this.nivelUp()
+            expResidual = (this._experiencia + expAdquirida) - this._experienciaParaProximoNivel    
+            this._experiencia = expResidual
+            expResidual = 0
+            let exp =  this._experienciaParaProximoNivel * (this._nivel - (this._nivel / 10))
+
+            this._experienciaParaProximoNivel = exp
+            console.log(`${exp} de experiência para o próximo nível`)  
+        }
+        else if(expAdquirida + this._experiencia < this._experienciaParaProximoNivel){
+            this._experiencia += expAdquirida
+            console.log(`${this._experiencia - expAdquirida} de experiência para o próximo nível`)  
+        }     
+       
+    }
 
     nivelUp(){
-        this.nivel += 1
-
-        let multiplicador = this.nivel
-
-        this.velocidade = multiplicador * 3
-
-        if(this.nivel % 2 ===0){
-            this.capacidade += 1
-            console.log(`Seu nível aumentou e com isso a sua carroça pode comportar ${this.viajantes} viajantes, e sua velocidade agora é ${this.velocidade}`)
+        
+        this._nivel += 1
+        let multiplicador = this._nivel
+        this._velocidade = multiplicador * 3
+        if(this._nivel % 2 ===0){
+            this._capacidade += 1
+            console.log(`Parabéns! Carroça atingiu o nível ${this._nivel} e sua velocidade agora é ${this._velocidade}`)
+        }else {
+            console.log(`Parabéns! Carroça atingiu o nível ${this._nivel}, agora ela pode comportar ${this._capacidade} viajantes, e sua velocidade agora é ${this._velocidade}`)
         }
+
+        
     }
 
 }
-
-
-
-
 
 
 export {Carroça}
