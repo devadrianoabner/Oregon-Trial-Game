@@ -2,82 +2,82 @@
 class Carroça{
 
     constructor(){
-        this._capacidade = 3
-        this._nivel = 1
-        this._viajantes = []
-        this._velocidade = 1
-        this._experiencia = 0
+        this._nome                        = "Carroça"
+        this._capacidade                  = 3
+        this._nivel                       = 1
+        this._viajantes                   = []
+        this._velocidade                  = 1
+        this._experiencia                 = 0
+        this._experienciaNecessaria       = 100
+        this._expAtual                    = 0
         this._experienciaParaProximoNivel = 100
     }
-    // get experiencia(){
-    //     return this._experiencia
-    // }
-
-    // set experiencia(novaExperiencia){
-    //     this._experiencia += novaExperiencia
-    // }
-
     convidarCarroça(viajante){
         if(this._viajantes.length < this._capacidade){
             this._viajantes.push(viajante)
-            console.log("Passageiro adicionado")
+            console.log("Passageiro adicionado") 
+
         }else if(this._viajantes.length >= this._capacidade){
-            console.log("Carroça lotada")
+
+            console.log(`${this._nome}Lotada`)
         }
     }
+
     sairDaCarroça(indice){
         if(this._viajantes.length > 0){
             this._viajantes.splice(indice, 1)
+
             console.log("Viajante removido") 
         }
     }
+
     assentosDisponiveis(){
         let assentosDisponiveis = this._capacidade - (this._viajantes.length + 1)
         console.log(`${assentosDisponiveis} é a quantidade de assentos livres`)
         return assentosDisponiveis
     }
+
     viajar(){
 
     }
+
     acampar(){
 
     }
+    
     ganhoDeExp(expAdquirida){    
-        console.log(`Sua carroça ganhou ${expAdquirida} de experiência`)      
-        let expResidual = 0
-        if(expAdquirida + this._experiencia >= this._experienciaParaProximoNivel){
-            this.nivelUp()
-            expResidual = (this._experiencia + expAdquirida) - this._experienciaParaProximoNivel    
-            this._experiencia = expResidual
-            expResidual = 0
-            let exp =  this._experienciaParaProximoNivel * (this._nivel - (this._nivel / 10))
-
-            this._experienciaParaProximoNivel = exp
-            console.log(`${exp} de experiência para o próximo nível`)  
+        console.log(`Sua ${this._nome} ganhou ${expAdquirida} de experiência`)        
+        if(expAdquirida + this._expAtual >= this._experienciaNecessaria){
+            this._experiencia += expAdquirida      
+            this._expAtual += expAdquirida                       
+            for(this._expAtual; this._expAtual >= this._experienciaParaProximoNivel;){
+                this._expAtual -= this._experienciaParaProximoNivel 
+                this._experienciaParaProximoNivel += (40 * (this._nivel / 2))                
+                this.nivelUp()              
+            }
+            console.log(`${this._experienciaParaProximoNivel - this._expAtual} de experiência para o próximo nível da ${this._nome}`)
+            this._experienciaNecessaria = this._experienciaParaProximoNivel
         }
-        else if(expAdquirida + this._experiencia < this._experienciaParaProximoNivel){
+        else if(expAdquirida + this._expAtual < this._experienciaNecessaria){
+            this._expAtual += expAdquirida
             this._experiencia += expAdquirida
-            console.log(`${this._experiencia - expAdquirida} de experiência para o próximo nível`)  
-        }     
-       
+            if(this._expAtual - this._experienciaParaProximoNivel > 0){
+            console.log(`${this._expAtual - this._experienciaParaProximoNivel} de experiência para o próximo nível da ${this._nome}`)
+            }else{
+                console.log(`${this._experienciaParaProximoNivel - this._expAtual} de experiência para o próximo nível da ${this._nome}`) 
+            }
+        }            
     }
-
     nivelUp(){
-        
         this._nivel += 1
         let multiplicador = this._nivel
         this._velocidade = multiplicador * 3
         if(this._nivel % 2 ===0){
             this._capacidade += 1
-            console.log(`Parabéns! Carroça atingiu o nível ${this._nivel} e sua velocidade agora é ${this._velocidade}`)
-        }else {
-            console.log(`Parabéns! Carroça atingiu o nível ${this._nivel}, agora ela pode comportar ${this._capacidade} viajantes, e sua velocidade agora é ${this._velocidade}`)
-        }
-
-        
+            console.log(`Parabéns! ${this._nome} atingiu o nível ${this._nivel} e sua velocidade agora é ${this._velocidade}`)
+        }else{
+            console.log(`Parabéns! ${this._nome} atingiu o nível ${this._nivel}, agora ela pode comportar ${this._capacidade} viajantes, e sua velocidade agora é ${this._velocidade}`)
+        }    
     }
-
 }
-
-
 export {Carroça}
