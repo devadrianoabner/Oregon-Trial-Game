@@ -51,11 +51,11 @@ class Viajante{
     }
     equipar(nomeDoEquipamento){
         
-        let listaEquipamentos = equipamentos.filter( (equipamento)=>{
+        let listaEquipamentos       = equipamentos.filter( (equipamento)     =>{
             return equipamento.nome === nomeDoEquipamento             
         })
 
-        let verificacao = this._equipamentos.some( (equipamento) =>{
+        let verificacao             = this._equipamentos.some( (equipamento) =>{
             return equipamento.tipo === listaEquipamentos[0].tipo
         })
 
@@ -72,10 +72,10 @@ class Viajante{
     }
 
     desequipar(nomeDoEquipamento){
-        let equipamento = this._equipamentos.findIndex( (equipamento)=>{
+        let equipamento             = this._equipamentos.findIndex( (equipamento)=>{
             return equipamento.nome === nomeDoEquipamento             
         })
-       let equipamentoRemovido = this._equipamentos.splice(equipamento,1)
+       let equipamentoRemovido      = this._equipamentos.splice(equipamento,1)
 
        this.desativarEquipamento(equipamentoRemovido[0])
 
@@ -90,7 +90,7 @@ class Viajante{
             this._experiencia += expAdquirida      
             this._expAtual    += expAdquirida                
 
-            for(this._expAtual; this._expAtual >= this._experienciaParaProximoNivel;){
+            for(this._expAtual; this._expAtual    >= this._experienciaParaProximoNivel;){
                 this._expAtual                    -= this._experienciaParaProximoNivel 
                 this._experienciaParaProximoNivel += (40 * (this._nivel / 2))                
                 this.nivelUp()              
@@ -100,7 +100,7 @@ class Viajante{
 
             this._experienciaNecessaria = this._experienciaParaProximoNivel
         }
-        else if(expAdquirida + this._expAtual < this._experienciaNecessaria){
+        else if(expAdquirida  + this._expAtual < this._experienciaNecessaria){
             this._expAtual    += expAdquirida
             this._experiencia += expAdquirida
 
