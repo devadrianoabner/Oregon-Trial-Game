@@ -4,11 +4,10 @@ import {equipamentos} from "./../Equipamentos/equipamentos.js"
 class Mercenario extends Viajante{
     constructor(nome){
         super(nome)
-        this._vida                        = 100
-        this._ataque                      = 15
-        this._defesa                      = 12
-        this._multiplicador               = {multiplicadorVida: 0.3, MultiplicadorAtaque:0.45, multiplicadorDefesa: 0.15}
-        this._equipamentos                = []
+        this._vida          = 150
+        this._ataque        = 12
+        this._defesa        = 10
+        this._multiplicador = {multiplicadorVida: 0.75, MultiplicadorAtaque:0.50, multiplicadorDefesa: 0.29}
     }
 
     vaiMeDarCabeçada(alvo){
