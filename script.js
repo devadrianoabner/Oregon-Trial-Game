@@ -15,6 +15,19 @@ mercenario.ganhoDeExp(1000)
 // carroçinha.ganhoDeExp(100)
 // carroçinha.ganhoDeExp(100)
 // carroçinha.ganhoDeExp(100)
+mercenario.equipar("Arco")
+mercenario.equipar("Escudo de videira encantada")
+// mercenario.equipar("Escudo de madeira")
+// mercenario.equipar("Espada longa")
+// mercenario.desequipar("Arco")
+mercenario.equipar("Arco")
+// mercenario.desequipar("Arco")
+
+
+
+// mercenario.equipar("Espada longa")
+
+// mercenario.ativarEquipamentos()
 
 
 
