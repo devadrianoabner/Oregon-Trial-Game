@@ -113,7 +113,7 @@ class Viajante{
     }
     nivelUp(){
         this._nivel   += 1
-        let novaVida   = this.vida   + (this._multiplicador.multiplicadorVida * this.vida    )
+        let novaVida   = this.vida   + (this._multiplicador.multiplicadorVida * this.vida      )
         let novoAtaque = this.ataque + (this._multiplicador.MultiplicadorAtaque * this.ataque  )
         let novaDefesa = this.defesa + (this._multiplicador.multiplicadorDefesa * this.defesa  )
 
