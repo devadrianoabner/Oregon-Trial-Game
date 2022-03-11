@@ -6,9 +6,11 @@ class Viajante{
         this._vida                        = 100
         this._ataque                      = 10
         this._defesa                      = 10
+        this._velocidade                  = 1
         this._vidaMaxima                  = this._vida
         this._ataqueMaximo                = this._ataque
         this._defesaMaxima                = this._defesa
+        this._velocidadeMaxima            = this._velocidade 
         this._poder                       = 0  
         this._saude                       = true
         this._fome                        = 100  
@@ -21,7 +23,10 @@ class Viajante{
         this._expAtual                    = 0
         this._experienciaParaProximoNivel = 100
         this._bolsa                       = []
+        this._bolsaComida                 = []
         this._equipamentos                = []
+        this._missoes                     = []
+        this._cozinha                     = false
     }
 
     get vida(){
@@ -50,6 +55,12 @@ class Viajante{
     set defesa(novaDefesa){
         this._defesa = Number(novaDefesa)
     }
+    get velocidade(){
+        return Number(this._velocidade) 
+    }
+    set velocidade(novaVelocidade){
+        this._velocidade = Number(novaVelocidade)
+    }
 
     get statusViajante(){
         return this._statusViajante = ""
@@ -77,14 +88,17 @@ class Viajante{
 
     // Sessão de equipamentos     // Sessão de equipamentos     // Sessão de equipamentos     // Sessão de equipamentos     // Sessão de equipamentos     
     ativarEquipamento(equipamento){ 
-        this.vida          += equipamento.vida
-        this._vidaMaxima   += equipamento.vida
+        this.vida              += equipamento.vida
+        this._vidaMaxima       += equipamento.vida
         
-        this.ataque        += equipamento.ataque
-        this._ataqueMaximo += equipamento.ataque
+        this.ataque            += equipamento.ataque
+        this._ataqueMaximo     += equipamento.ataque
         
-        this.defesa        += equipamento.defesa
-        this._defesaMaxima += equipamento.defesa
+        this.defesa            += equipamento.defesa
+        this._defesaMaxima     += equipamento.defesa
+
+        this._velocidade       += equipamento.velocidade
+        this._velocidadeMaxima += equipamento.velocidade
     };
     desativarEquipamento(equipamento){
         this.vida          -= equipamento.vida
@@ -95,6 +109,9 @@ class Viajante{
         
         this.defesa        -= equipamento.defesa
         this._defesaMaxima -= equipamento.defesa
+
+        this._velocidade       += equipamento.velocidade
+        this._velocidadeMaxima += equipamento.velocidade
     };
     equipar(nomeDoEquipamento){
         
@@ -162,19 +179,22 @@ class Viajante{
         }            
     };
     nivelUp(){
-        this._nivel   += 1
-        let novaVida   = this.vida   + (this._multiplicador.multiplicadorVida   * (42 * (this._nivel / 2)) )
-        let novoAtaque = this.ataque + (this._multiplicador.MultiplicadorAtaque * (15 * (this._nivel / 2)) )
-        let novaDefesa = this.defesa + (this._multiplicador.multiplicadorDefesa * (10 * (this._nivel / 2)) )
+        this._nivel             += 1
+        let novaVida            = this.vida         + (this._multiplicador.multiplicadorVida   * (40 * (this._nivel / 2)) )
+        let novoAtaque          = this.ataque       + (this._multiplicador.MultiplicadorAtaque * (10 * (this._nivel / 2)) )
+        let novaDefesa          = this.defesa       + (this._multiplicador.multiplicadorDefesa * (10 * (this._nivel / 2)) )
+        let novaVelocidade      = this.velocidade   + (this._multiplicador.multiplicadorDefesa * ( 2 * (this._nivel / 2)) )
 
-        this.vida          = novaVida.toFixed  ()
-        this._vidaMaxima   = novaVida.toFixed  ()
-        this.ataque        = novoAtaque.toFixed()
-        this._ataqueMaximo = novoAtaque.toFixed()
-        this.defesa        = novaDefesa.toFixed()
-        this._defesaMaxima = novaDefesa.toFixed()
-        let somaPoder = (this._ataqueMaximo * 2) + (this._defesaMaxima * 2) + (this._vidaMaxima * 1)
-        this._poder        += somaPoder
+        this.vida               = novaVida.toFixed       ()
+        this._vidaMaxima        = novaVida.toFixed       ()
+        this.ataque             = novoAtaque.toFixed     ()
+        this._ataqueMaximo      = novoAtaque.toFixed     ()
+        this.defesa             = novaDefesa.toFixed     ()
+        this._defesaMaxima      = novaDefesa.toFixed     ()
+        this.velocidade         = novaVelocidade.toFixed ()
+        this._velocidadeMaxima  = novaVelocidade.toFixed ()
+        let somaPoder           = (this._ataqueMaximo * 2) + (this._defesaMaxima * 2) + (this._vidaMaxima * 1)
+        this._poder            += somaPoder
 
         console.log(`Parabéns! ${this._nome} atingiu o nível ${this._nivel} sua vida agora é ${this.vida}, seu ataque é ${this.ataque} e sua defesa ${this.defesa}`)       
     };
@@ -199,7 +219,7 @@ class Viajante{
 
         console.log(`${this._nome} está sangrando`)
 
-        if(this.statusViajante === "sangrar"){
+        if(this._statusViajante === "sangrar"){
              let sangramento = window.setInterval( () =>{
                 if(this.vida > 1){
 
@@ -234,17 +254,19 @@ class Viajante{
 
             }else if(this.fome === 20){
 
-                this.vida   -= (this.vida   * 0.2)
-                this.ataque -= (this.ataque * 0.2)
-                this.defesa -= (this.defesa * 0.2)
+                this.vida       -= (this.vida   * 0.2    )
+                this.ataque     -= (this.ataque * 0.2    )
+                this.defesa     -= (this.defesa * 0.2    )
+                this.velocidade -= (this.velocidade * 0.2)
 
                 console.log(`${this._nome} está com muita fome`)
 
             }else if(this.fome <= 0){
-                this._saude  = false
-                this.vida   -= (this.vida   * 0.5)
-                this.ataque -= (this.ataque * 0.5)
-                this.defesa -= (this.defesa * 0.5)
+                this._saude      = false
+                this.vida       -= (this.vida   * 0.5    )
+                this.ataque     -= (this.ataque * 0.5    )
+                this.defesa     -= (this.defesa * 0.5    )
+                this.velocidade -= (this.velocidade * 0.5)
 
                 console.log(`${this._nome} está doente`)
                 clearInterval(fome)
