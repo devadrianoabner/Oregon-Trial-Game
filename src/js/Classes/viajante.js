@@ -6,11 +6,12 @@ class Viajante{
         this._vida                        = 100
         this._ataque                      = 10
         this._defesa                      = 10
-        this._saude                       = true
         this._vidaMaxima                  = this._vida
         this._ataqueMaximo                = this._ataque
         this._defesaMaxima                = this._defesa
         this._poder                       = 0  
+        this._saude                       = true
+        this._fome                        = 100  
         this._statusViajante              = ""  
         this._nivel                       = 1
         this._multiplicador               = {multiplicadorVida: 0.3, MultiplicadorAtaque:0.3, multiplicadorDefesa: 0.3}
@@ -58,6 +59,23 @@ class Viajante{
         this._statusViajante = novoStatusViajante
     }
 
+    get fome(){
+        return Number(this._fome) 
+    }
+
+    set fome(novaFome){
+        if(this._fome  + novaFome > 100){
+            return this._fome = 100
+        }else if(this._fome + novaFome <= 0){
+            return this._fome = 0
+        }
+    }
+    // Sessão de itens e usáveis      // Sessão de itens e usáveis      // Sessão de itens e usáveis      // Sessão de itens e usáveis      
+    comer(){
+
+    }
+
+    // Sessão de equipamentos     // Sessão de equipamentos     // Sessão de equipamentos     // Sessão de equipamentos     // Sessão de equipamentos     
     ativarEquipamento(equipamento){ 
         this.vida          += equipamento.vida
         this._vidaMaxima   += equipamento.vida
@@ -101,9 +119,7 @@ class Viajante{
 
             console.log(`${listaEquipamentos[0].nome} foi equipado, você recebeu ${listaEquipamentos[0].vida} de vida, ${listaEquipamentos[0].ataque} de ataque e ${listaEquipamentos[0].defesa} de defesa`)
         }
-
     };
-
     desequipar(nomeDoEquipamento){
         let equipamento             = this._equipamentos.findIndex( (equipamento)=>{
             return equipamento.nome === nomeDoEquipamento             
@@ -115,16 +131,7 @@ class Viajante{
        console.log(`${equipamentoRemovido[0].nome} desequipado: menos ${equipamentoRemovido[0].vida} de vida, menos ${equipamentoRemovido[0].ataque} de ataque e menos ${equipamentoRemovido[0].defesa} de defesa`)
     };
 
-    aumentarVida(valor){
-
-    }
-    aumentarAtaque(valor){
-
-    }
-    aumentarDefesa(valor){
-
-    }
-
+    // Ganho de EXP e Level!     // Ganho de EXP e Level!     // Ganho de EXP e Level!     // Ganho de EXP e Level!  
     ganhoDeExp(expAdquirida){    
 
         console.log(`Sua ${this._nome} ganhou ${expAdquirida} de experiência`)       
@@ -172,6 +179,7 @@ class Viajante{
         console.log(`Parabéns! ${this._nome} atingiu o nível ${this._nivel} sua vida agora é ${this.vida}, seu ataque é ${this.ataque} e sua defesa ${this.defesa}`)       
     };
 
+    // Alterar status do personagem     // Alterar status do personagem     // Alterar status do personagem     // Alterar status do personagem     
     morrer(){
         if(this.vida <= 0){
             console.log(`${this._nome} morreu`)
@@ -181,13 +189,11 @@ class Viajante{
         }
         return true
     }
-    
     reviver(){
         this.vida = this._vidaMaxima
         this._statusViajante = ""
         console.log(this._vidaMaxima)
     }
-
     sangrar(){
         this.statusViajante = "sangrar"
 
@@ -212,6 +218,39 @@ class Viajante{
 
             }, 1000);
         }
+    }
+
+    ativarFome(){
+        
+       let fome = window.setInterval( () =>{
+           
+            if(this.fome > 0){
+                this._fome -= 10
+                console.log(`${this.fome}: fome -10 `)
+            }
+
+            if(this.fome === 50){
+
+                console.log(`A barriga ${this._nome} está roncando`)
+
+            }else if(this.fome === 20){
+
+                this.vida   -= (this.vida   * 0.2)
+                this.ataque -= (this.ataque * 0.2)
+                this.defesa -= (this.defesa * 0.2)
+
+                console.log(`${this._nome} está com muita fome`)
+
+            }else if(this.fome <= 0){
+                this._saude  = false
+                this.vida   -= (this.vida   * 0.5)
+                this.ataque -= (this.ataque * 0.5)
+                this.defesa -= (this.defesa * 0.5)
+
+                console.log(`${this._nome} está doente`)
+                clearInterval(fome)
+            }
+        },1000)
 
     }
     
