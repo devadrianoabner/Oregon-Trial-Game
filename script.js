@@ -6,7 +6,9 @@ let mercenario = new Mercenario("Jorge")
 
 console.log(mercenario)
 
-// mercenario.ganhoDeExp(1000)
+// mercenario.sangrar(1000)
+
+mercenario.ganhoDeExp(1000)
 // carroçinha.ganhoDeExp(100)
 // carroçinha.ganhoDeExp(100)
 // carroçinha.ganhoDeExp(100)
@@ -23,10 +25,9 @@ console.log(mercenario)
 // mercenario.equipar("Anel da morte")
 // mercenario.desequipar("Arco")
 // mercenario.morrer()
-// mercenario.sangrar()
 // mercenario.equipar("Espada longa")
 // mercenario.ativarEquipamentos()
-mercenario.ativarFome()
+// mercenario.ativarFome()
 
 
 
