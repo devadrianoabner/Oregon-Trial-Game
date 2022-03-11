@@ -27,7 +27,6 @@ console.log(mercenario)
 // mercenario.equipar("Espada longa")
 // mercenario.ativarEquipamentos()
 mercenario.ativarFome()
-console.log(mercenario.fome)
 
 
 

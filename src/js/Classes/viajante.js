@@ -194,7 +194,7 @@ class Viajante{
         this._statusViajante = ""
         console.log(this._vidaMaxima)
     }
-    sangrar(){
+    sangrar(valor){
         this.statusViajante = "sangrar"
 
         console.log(`${this._nome} está sangrando`)
@@ -216,11 +216,10 @@ class Viajante{
                     clearInterval(sangramento)
                 }
 
-            }, 1000);
+            }, valor);
         }
     }
-
-    ativarFome(){
+    ativarFome(valor){
         
        let fome = window.setInterval( () =>{
            
@@ -250,7 +249,7 @@ class Viajante{
                 console.log(`${this._nome} está doente`)
                 clearInterval(fome)
             }
-        },1000)
+        },valor)
 
     }
     
