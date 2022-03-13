@@ -210,7 +210,7 @@ body{
     #informaçoes {
         position: fixed;
         left: 0;
-        bottom: 65px;
+        bottom: 120px;
         width: 250px;
         /* height: 300px; */
         background-color: rgba(191, 192, 192, 0.808);
