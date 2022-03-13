@@ -1,11 +1,28 @@
-import { Carroça } from "./src/js/carroça.js";
+import { Carroça }    from "./src/js/carroça.js";
 import { Mercenario } from "./src/js/Classes/Mercenario.js";
+import {  Bruxo     } from "./src/js/Classes/bruxo.js"
 
-let carroçinha = new Carroça()
+const body = document.getElementsByTagName("body")[0]
+
+let carrocinha = new Carroça()
+let bruxo = new Bruxo("Midas")
 let mercenario = new Mercenario("Jorge")
 
-console.log(mercenario)
+body.addEventListener("click", carrocinha.menuCarroça.bind(carrocinha))
 
+
+
+carrocinha.convidarCarroça(bruxo)
+carrocinha.convidarCarroça(mercenario)
+
+// carrocinha.menuCarroça()
+
+console.log(body)
+// console.log(bruxo)
+
+// carrocinha.menuCarroça()
+
+// carrocinha.selecionarPersonagem("Midas")
 // mercenario.sangrar(1000)
 
 // mercenario.pegarItem("Carne", 5)

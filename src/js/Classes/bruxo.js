@@ -1,7 +1,7 @@
 import {Viajante} from "./../Classes/viajante.js"
 import {equipamentos} from "./../Equipamentos/equipamentos.js"
 
-class Mercenario extends Viajante{
+class Bruxo extends Viajante{
     constructor(nome){
         super(nome)
         this._vida             = 150
@@ -12,9 +12,9 @@ class Mercenario extends Viajante{
         this._ataqueMaximo     = this._ataque
         this._defesaMaxima     = this._defesa
         this._velocidadeMaxima = this._velocidade  
-        this._multiplicador    = {multiplicadorVida: 0.75, MultiplicadorAtaque:0.50, multiplicadorDefesa: 0.30}
-        this._classe           = "mercenario"
-        this._src              = ""
+        this._multiplicador    = {multiplicadorVida: 0.70, MultiplicadorAtaque:0.55, multiplicadorDefesa: 0.30}
+        this._classe           = "bruxo"
+        
     }
 
     vaiMeDarCabeçada(alvo){
@@ -39,4 +39,4 @@ class Mercenario extends Viajante{
 
 };
 
-export {Mercenario}
+export {Bruxo}

@@ -22,10 +22,22 @@ class Viajante{
         this._experienciaNecessaria       = 100
         this._expAtual                    = 0
         this._experienciaParaProximoNivel = 100
+        this._ouro                        = 0
         this._bolsa                       = []
         this._equipamentos                = []
         this._missoes                     = []
+        this._classe                      = "viajante"
+        this._src                         = `../img/classes/gifs/${this._classe}.gif`
     };
+
+    get ouro(){
+        return Number(this._ouro)
+    }
+    set ouro(novoOuro){
+        if(novoOuro === Number){
+            this._ouro = novoOuro
+        }
+    }
 
     get vida(){
         return Number(this._vida) 
@@ -79,8 +91,18 @@ class Viajante{
             return this._fome = 0
         }
     };
-    
+
+    //Sessão de missões         //Sessão de missões         //Sessão de missões         //Sessão de missões         //Sessão de missões         
+
+
+
+
     // Sessão de itens e usáveis      // Sessão de itens e usáveis      // Sessão de itens e usáveis      // Sessão de itens e usáveis      
+    
+    mostrarItens(){
+
+    }
+    
     pegarItem(nomeDoItem, unidades){
 
         let itemSelecionado = itens.filter( (item) =>{

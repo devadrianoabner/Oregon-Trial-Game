@@ -10,6 +10,7 @@ class Carroça{
         this._experienciaNecessaria       = 100
         this._expAtual                    = 0
         this._experienciaParaProximoNivel = 100
+        this._ouro                        = 0
     }
     convidarCarroça(viajante){
         if(this._viajantes.length < this._capacidade){
@@ -91,6 +92,125 @@ class Carroça{
             console.log(`Parabéns! ${this._nome} atingiu o nível ${this._nivel}, agora ela pode comportar ${this._capacidade} viajantes, e sua velocidade agora é ${this._velocidade}`)
 
         }    
+    }
+
+    //seleciona o id para criar o menu do personagem
+    // selecionarIDPerson(event){
+    //     event.target = IMG
+        
+    //     console.log(event.target)
+
+    // }
+
+    // abre o menú da carroça
+    menuCarroça(event){
+
+    let botao = document.getElementById("carro")
+    let menu = document.getElementById("menuLateral")
+    let aside2 = document.createElement("aside")
+
+    
+
+    menu.innerHTML = ""
+
+    if(event.target === botao){
+
+        if(aside2.className === "ativarDisplay"){
+            aside2.classList.remove("ativarDisplay")
+        }
+
+        let div = document.createElement("div")
+        aside2.id = "informaçoes"
+        aside2.classList.add("ativarDisplay")
+        div.id = "footerInfo"
+       
+        aside2.innerHTML = `
+            <p id="fechar" >${this._nome} (fechar)</p>
+            <ul>
+                <li>Nível: ${this._nivel}</li>
+                <li> Experiencia:${this._expAtual}/${this._experienciaParaProximoNivel}</li>
+                <li class="barra barraDeExp"> 
+                    <p>.</p> 
+                </li>
+                <li>Velocidade: ${this._velocidade }</li>
+                <li> Ouro: ${this._ouro}</li>
+            </ul>      
+        
+        `
+        aside2.appendChild(div)
+
+        for(let i = 0; i< this._viajantes.length; i++){
+            let img = document.createElement("img")
+            img.src = `./src/img/classes/icon/${this._viajantes[i]._classe}.icon.png`
+            img.classList.add("iconeClasse")
+            img.id = `${this._viajantes[i]._nome}`
+
+            div.appendChild(img)
+        }    
+
+        menu.appendChild(aside2)
+
+    }
+        
+       
+
+        if(event.target.className === "iconeClasse"){
+            this.selecionarPersonagem(event.target.id)
+
+        }
+
+};
+
+
+
+    //Após selecionar imagem, o id vem para essa função
+    selecionarPersonagem(nomeDoPersonagem){
+       let personagemSelecionado = this._viajantes.filter((personagem) =>{
+        return  nomeDoPersonagem === personagem._nome
+       })
+
+       this.mostrarPersonagem(personagemSelecionado[0])
+
+       console.log(personagemSelecionado[0])
+       
+    }
+    mostrarPersonagem(personagem){
+        let aside = document.createElement("aside")
+ 
+        aside.id = "informaçoes"
+ 
+        aside.innerHTML = `<p id="fechar" >Status (fechar)</p>
+        <ul>
+            <li>Nível: ${personagem._nivel}</li>
+            <li>Poder: ${personagem._poder}</li>
+            <li>${personagem.vida}/${personagem._vidaMaxima}</li>
+            <li class="barra barraDeVida"> 
+                <p>.</p> 
+            </li> 
+            <li>Fome: ${personagem._fome}</li>
+            <li class="barra barraDeFome"> 
+                <p>.</p> 
+            </li> 
+            <li>Ataque: ${personagem.ataque}</li>
+            <li>Defesa: ${personagem.defesa }</li>
+            <li>Velocidade: ${personagem._velocidade }</li>
+            <li>Saúde: ${personagem._saude}</li>
+            <li>Experiencia:${personagem._expAtual}/${personagem._experienciaParaProximoNivel}</li>
+            <li class="barra barraDeExp"> 
+                <p>.</p> 
+            </li>
+            <li>Status: ${personagem._statusViajante}</li>
+            <li>Ouro: ${personagem._ouro}</li>
+            
+        </ul>
+ 
+        <div>
+            <p>${personagem._nome}: ${personagem._classe}</p>
+            <img  id="classeSelecionada" src="./src/img/classes/gifs/${personagem._classe}.gif" alt="${personagem._classe}">
+        </div>`
+        document.querySelector("body").appendChild(aside)
+ 
+         return aside
     }
 }
 export {Carroça}
