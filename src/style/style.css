@@ -67,6 +67,10 @@ body{
 
 
 .ativarDisplay{
+    /* retirar classe da tag html também */
+}
+
+#informaçoes{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -80,7 +84,6 @@ body{
     border-radius: 0px 7px 7px 0px;
     animation: 1s animaMenu;
 }
-
 #informaçoes div{
     display: flex;
     height: 100%;
@@ -90,6 +93,7 @@ body{
     justify-content: space-evenly;
     align-content: center;
     align-items: center;
+
 }
 #informaçoes div p{
     margin: 20px;
