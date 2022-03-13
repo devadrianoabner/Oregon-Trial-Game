@@ -2,18 +2,20 @@ import {Viajante} from "./../Classes/viajante.js"
 
 let equipamentos =[
     {
-        nome  : "",
-        vida  : 0,
-        ataque: 0,
-        defesa: 0,
-        id    : "",
-        tipo  : ""   
+        nome      : "",
+        vida      : 0,
+        ataque    : 0,
+        defesa    : 0,
+        velocidade: 0,
+        id        : "",
+        tipo      : ""   
     },
     {
-        nome  : "Espada longa",
-        vida  : 0,
+        nome      : "Espada longa",
+        vida      : 0,
         ataque: 10,
         defesa: 0,
+        velocidade: 0,
         id    : "0001",
         tipo  : "mao1"
     },
@@ -22,6 +24,7 @@ let equipamentos =[
         vida  : 0,
         ataque: 0,
         defesa: 10,
+        velocidade: 0,
         id    : "0002",
         tipo  : "mao2"
     },
@@ -30,6 +33,7 @@ let equipamentos =[
         vida  : 0,
         ataque: 20,
         defesa: 5,
+        velocidade: 0,
         id    : "0003",
         tipo  : "mao1"   
     },
@@ -38,6 +42,7 @@ let equipamentos =[
         vida  : 15,
         ataque: 5,
         defesa: 25,
+        velocidade: 0,
         id    : "0004",
         tipo  : "mao2"   
     },

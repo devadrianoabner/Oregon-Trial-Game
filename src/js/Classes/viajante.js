@@ -1,4 +1,5 @@
 import {equipamentos} from "./../Equipamentos/equipamentos.js"
+import {    itens    } from "./../Itens/itens.js"  
 
 class Viajante{
     constructor(nome){
@@ -17,21 +18,18 @@ class Viajante{
         this._statusViajante              = ""  
         this._nivel                       = 1
         this._multiplicador               = {multiplicadorVida: 0.3, MultiplicadorAtaque:0.3, multiplicadorDefesa: 0.3}
-        this._comida                      = 1
         this._experiencia                 = 0
         this._experienciaNecessaria       = 100
         this._expAtual                    = 0
         this._experienciaParaProximoNivel = 100
         this._bolsa                       = []
-        this._bolsaComida                 = []
         this._equipamentos                = []
         this._missoes                     = []
-        this._cozinha                     = false
-    }
+    };
 
     get vida(){
         return Number(this._vida) 
-    }
+    };
     set vida(novaVida){
         if(novaVida < 0){
             this._vida = Number(novaVida = 0)
@@ -40,39 +38,39 @@ class Viajante{
         }else{
             this._vida = novaVida
         }
-    }
+    };
 
     get ataque(){
         return Number(this._ataque) 
     }
     set ataque(novoAtaque){
         this._ataque = Number(novoAtaque)
-    }
+    };
 
     get defesa(){
         return Number(this._defesa) 
-    }
+    };
     set defesa(novaDefesa){
         this._defesa = Number(novaDefesa)
-    }
+    };
     get velocidade(){
         return Number(this._velocidade) 
-    }
+    };
     set velocidade(novaVelocidade){
         this._velocidade = Number(novaVelocidade)
-    }
+    };
 
     get statusViajante(){
         return this._statusViajante = ""
-    }
+    };
 
     set statusViajante(novoStatusViajante){
         this._statusViajante = novoStatusViajante
-    }
+    };
 
     get fome(){
         return Number(this._fome) 
-    }
+    };
 
     set fome(novaFome){
         if(this._fome  + novaFome > 100){
@@ -80,11 +78,60 @@ class Viajante{
         }else if(this._fome + novaFome <= 0){
             return this._fome = 0
         }
-    }
+    };
+    
     // Sessão de itens e usáveis      // Sessão de itens e usáveis      // Sessão de itens e usáveis      // Sessão de itens e usáveis      
-    comer(){
+    pegarItem(nomeDoItem, unidades){
 
-    }
+        let itemSelecionado = itens.filter( (item) =>{
+            return item.nome === nomeDoItem
+        })
+        itemSelecionado[0].quantidade = unidades
+        this._bolsa.push(itemSelecionado[0])
+
+        console.log(`${this._nome} recebeu ${unidades} unidades de ${itemSelecionado[0].nome}`)
+    };
+    usarItem(nome, quantidade){
+        let itemSelecionado = this._bolsa.filter( (item) =>{
+            return item.nome = nome
+        })
+
+        let indiceItem = this._bolsa.findIndex( (item)=>{
+            return item. nome === itemSelecionado[0].quantidade.nome
+        })
+
+        if( quantidade <= 0 || quantidade > itemSelecionado[0].quantidade || quantidade !== Number){
+         
+            return console.log("Você não usou o item")
+
+        }else if(quantidade <= itemSelecionado[0].quantidade){
+        
+            let tempoAtivo = itemSelecionado[0].tempo * 1000 * itemSelecionado[0].quantidade
+            itemSelecionado[0].quantidade -= quantidade 
+            
+            if(itemSelecionado[0].quantidade === 0){
+                this._bolsa.splice(indiceItem, 1)
+            }
+
+            this.vida       += itemSelecionado[0].vida
+            this.ataque     += itemSelecionado[0].ataque
+            this.defesa     += itemSelecionado[0].defesa
+            this.velocidade += itemSelecionado[0].velocidade
+            this.fome       += itemSelecionado[0].fome
+
+            console.log("Seus status foram aumentados temporariamente")
+            console.log(`Vida: ${this.vida} Ataque:${this.ataque} Defesa:${this.defesa} Velocidade:${this.velocidade} Fome:${this.fome}`)
+           
+            setTimeout(  () =>{
+            this.ataque     -= itemSelecionado[0].ataque
+            this.defesa     -= itemSelecionado[0].defesa
+            this.velocidade -= itemSelecionado[0].velocidade
+
+            console.log(`Vida: Ataque:${this.ataque} Defesa:${this.defesa} Velocidade:${this.velocidade}`)
+          
+            }, tempoAtivo)
+        }
+    };
 
     // Sessão de equipamentos     // Sessão de equipamentos     // Sessão de equipamentos     // Sessão de equipamentos     // Sessão de equipamentos     
     ativarEquipamento(equipamento){ 
@@ -101,14 +148,14 @@ class Viajante{
         this._velocidadeMaxima += equipamento.velocidade
     };
     desativarEquipamento(equipamento){
-        this.vida          -= equipamento.vida
-        this._vidaMaxima   -= equipamento.vida
+        this.vida              -= equipamento.vida
+        this._vidaMaxima       -= equipamento.vida
         
-        this.ataque        -= equipamento.ataque
-        this._ataqueMaximo -= equipamento.ataque
+        this.ataque            -= equipamento.ataque
+        this._ataqueMaximo     -= equipamento.ataque
         
-        this.defesa        -= equipamento.defesa
-        this._defesaMaxima -= equipamento.defesa
+        this.defesa            -= equipamento.defesa
+        this._defesaMaxima     -= equipamento.defesa
 
         this._velocidade       += equipamento.velocidade
         this._velocidadeMaxima += equipamento.velocidade
@@ -238,7 +285,7 @@ class Viajante{
 
             }, valor);
         }
-    }
+    };
     ativarFome(valor){
         
        let fome = window.setInterval( () =>{
@@ -272,9 +319,7 @@ class Viajante{
                 clearInterval(fome)
             }
         },valor)
-
-    }
-    
+    };  
 };
 
 export {Viajante}

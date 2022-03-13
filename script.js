@@ -8,7 +8,9 @@ console.log(mercenario)
 
 // mercenario.sangrar(1000)
 
-mercenario.ganhoDeExp(1000)
+// mercenario.pegarItem("Carne", 5)
+// mercenario.usarItem("Carne", true)
+// mercenario.ganhoDeExp(1000)
 // carroçinha.ganhoDeExp(100)
 // carroçinha.ganhoDeExp(100)
 // carroçinha.ganhoDeExp(100)
