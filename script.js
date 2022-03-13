@@ -2,32 +2,30 @@ import { Carroça }    from "./src/js/carroça.js";
 import { Mercenario } from "./src/js/Classes/Mercenario.js";
 import {  Bruxo     } from "./src/js/Classes/bruxo.js"
 
-const body = document.getElementsByTagName("body")[0]
+const body = document.querySelector("body")
 
 let carrocinha = new Carroça()
-let bruxo = new Bruxo("Midas")
-let mercenario = new Mercenario("Jorge")
+let midas = new Bruxo("Midas")
+let jemeria = new Bruxo("Jeremia")
 
-body.addEventListener("click", carrocinha.menuCarroça.bind(carrocinha))
+let jorge = new Mercenario("Jorge")
+
+body.addEventListener("click", carrocinha.selecionarMenu.bind(carrocinha))
 
 
 
-carrocinha.convidarCarroça(bruxo)
-carrocinha.convidarCarroça(mercenario)
+carrocinha.convidarCarroça(midas)
+carrocinha.convidarCarroça(jemeria)
+carrocinha.convidarCarroça(jorge)
+
 
 // carrocinha.menuCarroça()
-
-console.log(body)
 // console.log(bruxo)
-
 // carrocinha.menuCarroça()
-
 // carrocinha.selecionarPersonagem("Midas")
-// mercenario.sangrar(1000)
+// midas.sangrar(1000)
 
-// mercenario.pegarItem("Carne", 5)
-// mercenario.usarItem("Carne", true)
-// mercenario.ganhoDeExp(1000)
+// midas.ganhoDeExp(1000)
 // carroçinha.ganhoDeExp(100)
 // carroçinha.ganhoDeExp(100)
 // carroçinha.ganhoDeExp(100)

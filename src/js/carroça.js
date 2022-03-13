@@ -94,74 +94,63 @@ class Carroça{
         }    
     }
 
-    //seleciona o id para criar o menu do personagem
-    // selecionarIDPerson(event){
-    //     event.target = IMG
-        
-    //     console.log(event.target)
+    //Abrir menús
+    selecionarMenu(event){
+        let menu = document.getElementById("menuLateral")
+        menu.innerHTML = ""
 
-    // }
-
-    // abre o menú da carroça
-    menuCarroça(event){
-
-    let botao = document.getElementById("carro")
-    let menu = document.getElementById("menuLateral")
-    let aside2 = document.createElement("aside")
-
-    
-
-    menu.innerHTML = ""
-
-    if(event.target === botao){
-
-        if(aside2.className === "ativarDisplay"){
-            aside2.classList.remove("ativarDisplay")
+        if(event.target.id === "carro"){
+            this.menuCarroça(menu)
         }
-
-        let div = document.createElement("div")
-        aside2.id = "informaçoes"
-        aside2.classList.add("ativarDisplay")
-        div.id = "footerInfo"
-       
-        aside2.innerHTML = `
-            <p id="fechar" >${this._nome} (fechar)</p>
-            <ul>
-                <li>Nível: ${this._nivel}</li>
-                <li> Experiencia:${this._expAtual}/${this._experienciaParaProximoNivel}</li>
-                <li class="barra barraDeExp"> 
-                    <p>.</p> 
-                </li>
-                <li>Velocidade: ${this._velocidade }</li>
-                <li> Ouro: ${this._ouro}</li>
-            </ul>      
-        
-        `
-        aside2.appendChild(div)
-
-        for(let i = 0; i< this._viajantes.length; i++){
-            let img = document.createElement("img")
-            img.src = `./src/img/classes/icon/${this._viajantes[i]._classe}.icon.png`
-            img.classList.add("iconeClasse")
-            img.id = `${this._viajantes[i]._nome}`
-
-            div.appendChild(img)
-        }    
-
-        menu.appendChild(aside2)
-
-    }
-        
-       
-
-        if(event.target.className === "iconeClasse"){
+        else if(event.target.className === "iconeClasse"){
             this.selecionarPersonagem(event.target.id)
 
         }
 
-};
+    }
 
+    // Cria o menú da carroça
+    menuCarroça(menu){
+    
+        let aside2 = document.createElement("aside")
 
+            if(aside2.className === "ativarDisplay"){
+                aside2.classList.remove("ativarDisplay")
+            }
+
+            let div = document.createElement("div")
+            aside2.id = "informaçoes"
+            aside2.classList.add("ativarDisplay")
+            div.id = "footerInfo"
+       
+            aside2.innerHTML = `
+                <p id="fechar" >${this._nome} (fechar)</p>
+                <ul>
+                    <li>Nível: ${this._nivel}</li>
+                    <li> Experiencia:${this._expAtual}/${this._experienciaParaProximoNivel}</li>
+                    <li class="barra barraDeExp"> 
+                        <p>.</p> 
+                    </li>
+                    <li>Velocidade: ${this._velocidade }</li>
+                    <li> Ouro: ${this._ouro}</li>
+                </ul>      
+            `
+            aside2.appendChild(div)
+
+            for(let i = 0; i< this._viajantes.length; i++){
+                let img = document.createElement("img")
+                img.src = `./src/img/classes/icon/${this._viajantes[i]._classe}.icon.png`
+                img.alt = `${this._nome}`
+                img.classList.add("iconeClasse")
+                img.id = `${this._viajantes[i]._nome}`
+
+                div.appendChild(img)
+            }
+
+            menu.appendChild(aside2)   
+    
+        return aside2
+    };
 
     //Após selecionar imagem, o id vem para essa função
     selecionarPersonagem(nomeDoPersonagem){
@@ -174,8 +163,10 @@ class Carroça{
        console.log(personagemSelecionado[0])
        
     }
+    //Cria o card do personagem no HTML
     mostrarPersonagem(personagem){
         let aside = document.createElement("aside")
+        let menu = document.getElementById("menuLateral")
  
         aside.id = "informaçoes"
  
@@ -208,8 +199,9 @@ class Carroça{
             <p>${personagem._nome}: ${personagem._classe}</p>
             <img  id="classeSelecionada" src="./src/img/classes/gifs/${personagem._classe}.gif" alt="${personagem._classe}">
         </div>`
-        document.querySelector("body").appendChild(aside)
- 
+
+        menu.appendChild(aside)
+
          return aside
     }
 }
