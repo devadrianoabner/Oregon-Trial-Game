@@ -21,10 +21,23 @@ let itens =[
         velocidade : 0,
         tempo      : 1,
         quantidade : 1,
-        id         : "9000",
+        id         : "9999",
         fome       : +20,   
         tipo       : "comida",
     },
+    {
+        nome       : "Algo podre",
+        vida       : -45,
+        ataque     : 0,
+        defesa     : 0,
+        velocidade : 0,
+        tempo      : 0,   
+        quantidade : 0,
+        id         : "8999",
+        fome       : +20,  
+        tipo       : "comida", 
+    },
+    
 ]
 
 export {itens}
