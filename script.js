@@ -17,10 +17,16 @@ body.addEventListener("click", carrocinha.selecionarMenu.bind(carrocinha))
 carrocinha.convidarCarroça(midas)
 carrocinha.convidarCarroça(jemeria)
 carrocinha.convidarCarroça(jorge)
-
+midas.pegarItem("Algo podre", 10)
 
 // carrocinha.menuCarroça()
-// console.log(bruxo)
+midas.usarItem("Algo podre", 1)
+
+
+
+console.log(midas)
+
+
 // carrocinha.menuCarroça()
 // carrocinha.selecionarPersonagem("Midas")
 // midas.sangrar(1000)
