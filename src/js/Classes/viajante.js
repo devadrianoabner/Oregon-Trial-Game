@@ -113,20 +113,22 @@ class Viajante{
 
         console.log(`${this._nome} recebeu ${unidades} unidades de ${itemSelecionado[0].nome}`)
     };
+
     usarItem(nome, quantidade){
         let itemSelecionado = this._bolsa.filter( (item) =>{
             return item.nome = nome
         })
 
         let indiceItem = this._bolsa.findIndex( (item)=>{
-            return item. nome === itemSelecionado[0].quantidade.nome
+            return item.nome === itemSelecionado[0].nome
         })
 
-        if( quantidade <= 0 || quantidade > itemSelecionado[0].quantidade || quantidade !== Number){
+        if( quantidade <= 0 || quantidade > itemSelecionado[0].quantidade && quantidade !== Number){
          
             return console.log("Você não usou o item")
 
-        }else if(quantidade <= itemSelecionado[0].quantidade){
+        }
+        else if(quantidade <= itemSelecionado[0].quantidade){
         
             let tempoAtivo = itemSelecionado[0].tempo * 1000 * itemSelecionado[0].quantidade
             itemSelecionado[0].quantidade -= quantidade 
@@ -135,11 +137,11 @@ class Viajante{
                 this._bolsa.splice(indiceItem, 1)
             }
 
-            this.vida       += itemSelecionado[0].vida
+            this.vida       += itemSelecionado[0].vida * quantidade
             this.ataque     += itemSelecionado[0].ataque
             this.defesa     += itemSelecionado[0].defesa
             this.velocidade += itemSelecionado[0].velocidade
-            this.fome       += itemSelecionado[0].fome
+            this.fome       += itemSelecionado[0].fome * quantidade
 
             console.log("Seus status foram aumentados temporariamente")
             console.log(`Vida: ${this.vida} Ataque:${this.ataque} Defesa:${this.defesa} Velocidade:${this.velocidade} Fome:${this.fome}`)

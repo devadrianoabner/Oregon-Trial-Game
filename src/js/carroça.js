@@ -165,22 +165,52 @@ class Carroça{
     }
     //Cria o card do personagem no HTML
     mostrarPersonagem(personagem){
+        //criando elementos
         let aside = document.createElement("aside")
+
         let menu = document.getElementById("menuLateral")
- 
+
+        let liVida = document.createElement("li")
+        let liFome = document.createElement("li")
+        
+        let pVida = document.createElement("p")
+        let pFome = document.createElement("p")
+        // let pExp = document.createElement("p")
+        
+        //Adicionando classes
+        liVida.classList.add("barra")
+        liVida.classList.add("barraDeVida")
+        
+        liFome.classList.add("barra")
+        liFome.classList.add("barraDeFome")
+        
+       
+        //Adicionando texto
+        let vidaPorcentagem = (personagem.vida * 100 ) / personagem._vidaMaxima
+        let Fomeporcentagem = personagem.fome
+
+
+        pVida.style = `width: ${vidaPorcentagem}%;`
+        pFome.style = `width: ${Fomeporcentagem}%;`
+        
+
+        pVida.innerText = `${personagem.vida}/${personagem._vidaMaxima}`
+        pFome.innerText = `${personagem.fome}`
+
+
         aside.id = "informaçoes"
  
         aside.innerHTML = `<p id="fechar" >Status (fechar)</p>
-        <ul>
+        <ul id ="novaUl">
             <li>Nível: ${personagem._nivel}</li>
             <li>Poder: ${personagem._poder}</li>
-            <li>${personagem.vida}/${personagem._vidaMaxima}</li>
-            <li class="barra barraDeVida"> 
-                <p>.</p> 
+            <li></li>
+            <li class="barra barraDeFome"> 
+            <p style = width: ${vidaPorcentagem}%; >.</p> 
             </li> 
             <li>Fome: ${personagem._fome}</li>
             <li class="barra barraDeFome"> 
-                <p>.</p> 
+                <p id>.</p> 
             </li> 
             <li>Ataque: ${personagem.ataque}</li>
             <li>Defesa: ${personagem.defesa }</li>
@@ -200,9 +230,14 @@ class Carroça{
             <img  id="classeSelecionada" src="./src/img/classes/gifs/${personagem._classe}.gif" alt="${personagem._classe}">
         </div>`
 
-        menu.appendChild(aside)
+        aside.appendChild(liVida)
+        aside.appendChild(liFome)
+        liVida.appendChild(pVida)
+        liFome.appendChild(pFome)
 
-         return aside
+        menu.appendChild(aside)
+        
+        return aside
     }
 }
 export {Carroça}
