@@ -2,6 +2,7 @@ import {equipamentos} from "./../Equipamentos/equipamentos.js"
 import {    itens    } from "./../Itens/itens.js"  
 
 class Viajante{
+    
     constructor(nome){
         this._nome                        = nome
         this._vida                        = 100
